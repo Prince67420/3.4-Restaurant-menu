@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#183e35">
+  <title>Juniper &amp; Salt | All-Day Menu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #183e35;
+      --muted: #52645a;
+      --accent: #bd593d;
+      --paper: #f5f2e9;
+      --line: rgba(24, 62, 53, 0.24);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-width: 320px;
+      background-color: var(--paper);
+      background-image: radial-gradient(rgba(24, 62, 53, 0.08) 0.7px, transparent 0.7px);
+      background-size: 8px 8px;
+      color: var(--ink);
+      font-family: "DM Sans", sans-serif;
+    }
+
+    .page-header {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      max-width: 1336px;
+      margin: 0 auto;
+      padding: 35px 32px 26px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .brand-mark,
+    .eyebrow,
+    .menu-note,
+    .menu-section h3,
+    .menu-price,
+    .page-footer {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .brand-mark {
+      margin: 0 0 7px;
+      color: var(--accent);
+      letter-spacing: 0.12em;
+    }
+
+    h1,
+    h2,
+    .item-name {
+      font-family: "Playfair Display", Georgia, serif;
+    }
+
+    .page-header h1 {
+      margin: 0;
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      font-weight: 600;
+      line-height: 1.05;
+    }
+
+    .header-note {
+      max-width: 260px;
+      margin: 0 0 3px;
+      color: var(--muted);
+      font-size: 0.86rem;
+      line-height: 1.55;
+      text-align: right;
+    }
+
+    main {
+      max-width: 1336px;
+      margin: 0 auto;
+      padding: 24px 20px 30px;
+    }
+
+    .menu-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: start;
+    }
+
+    .menu-panel {
+      width: 400px;
+      height: 550px;
+      margin: 12px;
+      padding: 27px 27px 24px;
+      overflow: hidden;
+      border: 1px solid rgba(24, 62, 53, 0.62);
+      box-shadow: 5px 6px 0 rgba(24, 62, 53, 0.12);
+      display: flex;
+      flex-direction: column;
+      background-size: cover;
+      color: var(--ink);
+    }
+
+    .menu--breakfast {
+      background-image: linear-gradient(rgba(250, 247, 235, 0.91), rgba(250, 247, 235, 0.91)), url("https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=900&q=80");
+      background-position: center 48%;
+    }
+
+    .menu--lunch {
+      background-image: linear-gradient(rgba(241, 247, 235, 0.91), rgba(241, 247, 235, 0.91)), url("https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=900&q=80");
+      background-position: center;
+    }
+
+    .menu--dinner {
+      background-image: linear-gradient(rgba(249, 241, 229, 0.91), rgba(249, 241, 229, 0.91)), url("https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=900&q=80");
+      background-position: center 55%;
+    }
+
+    .menu-topline {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 13px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .eyebrow,
+    .menu-note {
+      margin: 0;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+    }
+
+    .menu-panel h2 {
+      margin: 19px 0 2px;
+      font-size: 2.35rem;
+      font-weight: 600;
+      line-height: 1.1;
+    }
+
+    .menu-subtitle {
+      margin: 0 0 17px;
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    .menu-section h3 {
+      margin: 0 0 9px;
+      padding-bottom: 7px;
+      border-bottom: 1px solid var(--line);
+      color: var(--accent);
+      letter-spacing: 0.1em;
+    }
+
+    .menu-list {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .menu-item {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      column-gap: 12px;
+      align-items: baseline;
+    }
+
+    .item-name {
+      font-size: 1.02rem;
+      font-weight: 600;
+    }
+
+    .menu-price {
+      color: var(--ink);
+      font-size: 0.76rem;
+      letter-spacing: 0.02em;
+    }
+
+    .item-description {
+      grid-column: 1 / -1;
+      margin: 1px 0 0;
+      color: var(--muted);
+      font-size: 0.74rem;
+      line-height: 1.4;
+    }
+
+    .menu-section + .menu-section {
+      margin-top: 16px;
+    }
+
+    .menu-panel .menu-section:last-of-type {
+      margin-top: auto;
+      padding-top: 14px;
+    }
+
+    .menu-panel .menu-section:last-of-type .menu-list {
+      grid-template-columns: 1fr 1fr;
+      column-gap: 15px;
+      row-gap: 8px;
+    }
+
+    .menu-panel .menu-section:last-of-type .item-name {
+      font-family: "DM Sans", sans-serif;
+      font-size: 0.78rem;
+      font-weight: 500;
+    }
+
+    .menu-panel .menu-section:last-of-type .menu-item {
+      column-gap: 5px;
+    }
+
+    .menu-panel .menu-section:last-of-type .menu-price {
+      font-size: 0.68rem;
+    }
+
+    .page-footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      max-width: 1336px;
+      margin: 0 auto;
+      padding: 15px 32px 22px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      letter-spacing: 0.07em;
+    }
+
+    @media (max-width: 520px) {
+      .page-header {
+        align-items: start;
+        flex-direction: column;
+        gap: 12px;
+        padding: 27px 20px 21px;
+      }
+
+      .header-note {
+        max-width: none;
+        text-align: left;
+      }
+
+      main {
+        padding: 14px 4px 24px;
+      }
+
+      .menu-panel {
+        width: min(400px, calc(100vw - 32px));
+        margin: 10px 0;
+        padding: 24px 22px;
+      }
+
+      .page-footer {
+        flex-direction: column;
+        padding-right: 20px;
+        padding-left: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="page-header">
+    <div>
+      <p class="brand-mark">Neighborhood kitchen · Est. 2018</p>
+      <h1>Juniper &amp; Salt</h1>
+    </div>
+    <p class="header-note">Seasonal plates, good company.<br>Made fresh in the heart of the neighborhood.</p>
+  </header>
+
+  <main>
+    <section class="menu-grid" aria-label="Restaurant menus">
+      <article class="menu-panel menu--breakfast" aria-labelledby="breakfast-title">
+        <div class="menu-topline">
+          <p class="eyebrow">Good morning</p>
+          <p class="menu-note">7–11 am</p>
+        </div>
+        <h2 id="breakfast-title">Breakfast</h2>
+        <p class="menu-subtitle">A slow start, done right.</p>
+        <section class="menu-section" aria-label="Breakfast plates">
+          <h3>From the kitchen</h3>
+          <ul class="menu-list">
+            <li class="menu-item"><span class="item-name">Lemon ricotta pancakes</span><span class="menu-price">$13</span><p class="item-description">Blueberry compote, maple butter, toasted pecans</p></li>
+            <li class="menu-item"><span class="item-name">Garden breakfast bowl</span><span class="menu-price">$15</span><p class="item-description">Soft eggs, crispy potatoes, greens, herbed yogurt</p></li>
+            <li class="menu-item"><span class="item-name">Avocado toast</span><span class="menu-price">$12</span><p class="item-description">Sourdough, chili oil, pickled onion, jammy egg</p></li>
+            <li class="menu-item"><span class="item-name">Apple-cinnamon oats</span><span class="menu-price">$10</span><p class="item-description">Steel-cut oats, roasted apple, brown sugar</p></li>
+          </ul>
+        </section>
+        <section class="menu-section" aria-label="Breakfast drinks">
+          <h3>To sip</h3>
+          <ul class="menu-list">
+            <li class="menu-item"><span class="item-name">House coffee</span><span class="menu-price">$4</span></li>
+            <li class="menu-item"><span class="item-name">Fresh orange juice</span><span class="menu-price">$5</span></li>
+            <li class="menu-item"><span class="item-name">Matcha latte</span><span class="menu-price">$6</span></li>
+            <li class="menu-item"><span class="item-name">Earl Grey tea</span><span class="menu-price">$4</span></li>
+          </ul>
+        </section>
+      </article>
+
+      <article class="menu-panel menu--lunch" aria-labelledby="lunch-title">
+        <div class="menu-topline">
+          <p class="eyebrow">Meet in the middle</p>
+          <p class="menu-note">11 am–3 pm</p>
+        </div>
+        <h2 id="lunch-title">Lunch</h2>
+        <p class="menu-subtitle">Bright, fresh, and made for a break.</p>
+        <section class="menu-section" aria-label="Lunch plates">
+          <h3>From the kitchen</h3>
+          <ul class="menu-list">
+            <li class="menu-item"><span class="item-name">Roasted tomato soup</span><span class="menu-price">$11</span><p class="item-description">Basil oil, parmesan, grilled sourdough</p></li>
+            <li class="menu-item"><span class="item-name">Crispy chicken sandwich</span><span class="menu-price">$16</span><p class="item-description">Herb slaw, dill pickles, house brioche</p></li>
+            <li class="menu-item"><span class="item-name">Market greens salad</span><span class="menu-price">$14</span><p class="item-description">Cucumber, avocado, toasted seeds, lemon vinaigrette</p></li>
+            <li class="menu-item"><span class="item-name">Mushroom melt</span><span class="menu-price">$15</span><p class="item-description">Wild mushrooms, sharp cheddar, caramelized onion</p></li>
+          </ul>
+        </section>
+        <section class="menu-section" aria-label="Lunch drinks">
+          <h3>To sip</h3>
+          <ul class="menu-list">
+            <li class="menu-item"><span class="item-name">Cucumber lemonade</span><span class="menu-price">$5</span></li>
+            <li class="menu-item"><span class="item-name">Iced hibiscus tea</span><span class="menu-price">$4</span></li>
+            <li class="menu-item"><span class="item-name">Sparkling water</span><span class="menu-price">$3</span></li>
+            <li class="menu-item"><span class="item-name">Cold brew</span><span class="menu-price">$5</span></li>
+          </ul>
+        </section>
+      </article>
+
+      <article class="menu-panel menu--dinner" aria-labelledby="dinner-title">
+        <div class="menu-topline">
+          <p class="eyebrow">Stay a little longer</p>
+          <p class="menu-note">5–10 pm</p>
+        </div>
+        <h2 id="dinner-title">Dinner</h2>
+        <p class="menu-subtitle">A table worth gathering around.</p>
+        <section class="menu-section" aria-label="Dinner plates">
+          <h3>From the kitchen</h3>
+          <ul class="menu-list">
+            <li class="menu-item"><span class="item-name">Slow-roasted salmon</span><span class="menu-price">$25</span><p class="item-description">Crispy potatoes, spring peas, mustard-dill sauce</p></li>
+            <li class="menu-item"><span class="item-name">Wild mushroom risotto</span><span class="menu-price">$22</span><p class="item-description">Arborio rice, parmesan, thyme, truffle oil</p></li>
+            <li class="menu-item"><span class="item-name">Braised short rib</span><span class="menu-price">$29</span><p class="item-description">Red wine jus, whipped potatoes, glazed carrots</p></li>
+            <li class="menu-item"><span class="item-name">Roasted squash plate</span><span class="menu-price">$19</span><p class="item-description">Farro, crispy chickpeas, maple-tahini dressing</p></li>
+          </ul>
+        </section>
+        <section class="menu-section" aria-label="Dinner drinks">
+          <h3>To sip</h3>
+          <ul class="menu-list">
+            <li class="menu-item"><span class="item-name">House lemonade</span><span class="menu-price">$5</span></li>
+            <li class="menu-item"><span class="item-name">Ginger spritz</span><span class="menu-price">$7</span></li>
+            <li class="menu-item"><span class="item-name">Local cider</span><span class="menu-price">$8</span></li>
+            <li class="menu-item"><span class="item-name">Red wine</span><span class="menu-price">$10</span></li>
+          </ul>
+        </section>
+      </article>
+    </section>
+  </main>
+
+  <footer class="page-footer">
+    <span>Juniper &amp; Salt · 24 Willow Street</span>
+    <span>Good food. Room for everyone.</span>
+  </footer>
+</body>
+</html>
